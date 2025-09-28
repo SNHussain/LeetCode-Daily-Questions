@@ -1,0 +1,50 @@
+Brute approach
+
+class Solution {
+public:
+    int largestPerimeter(vector<int>& nums) {
+        int n=nums.size();
+
+        sort(nums.begin(), nums.end());
+        //[1,1,2,10]
+        // i   j  k
+
+        int maxPerimeter = 0;
+
+        for(int i=n-1; i>=0; i--){
+            for(int j=i-1; j>=0 ; j--){
+                for(int k=j-1; k>=0; k--){
+                    
+                    if(nums[k]+nums[j] > nums[i]){
+                    int peri= nums[i] + nums[j] +nums[k];
+                    maxPerimeter = max(maxPerimeter, peri);
+                    }
+                }
+            }
+        }
+
+        return maxPerimeter;
+    }
+};
+
+
+Optimized approach
+
+
+class Solution {
+public:
+    int largestPerimeter(vector<int>& nums) {
+        int n=nums.size();
+
+        sort(nums.begin(), nums.end());
+        
+        for(int i=n-3 ; i>=0 ; i--){
+            if(nums[i] + nums[i+1] > nums[i+2]){
+                return nums[i] + nums[i+1] + nums[i+2];
+            }
+        }
+
+        return 0;
+       
+    }
+};
